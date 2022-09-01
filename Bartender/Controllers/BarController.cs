@@ -1,9 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Bartender.Data;
+using Bartender.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Bartender.Controllers
 {
     public class BarController : Controller
     {
+        private readonly ApplicationDbContext _db;
+
+        public BarController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
+
         public IActionResult CreateOrder()
         {
             return View();
@@ -21,6 +30,7 @@ namespace Bartender.Controllers
 
         public IActionResult Menue()
         {
+            IEnumerable<BarMenueModel> MenueList = _db.BarMenue;
             return View();
         }
 
